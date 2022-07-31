@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do your best!</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <button id="logout" class="hidden" type="submit">log-out</button>
+    <div id="back">
+      <div id="weather">
+        <span></span>
+        <span></span>
+      </div>
+      <div id="clock_box">
+        <span>현재시간</span>
+        <h2 id="clock">00:00:00</h2>
+      </div>
+      <form action="" class="hidden" id="login-form">
+        <input type="text" placeholder="What is your name?" />
+        <!-- <input type="submit" value="Log-in" /> -->
+      </form>
+      <h1 id="greeting" class="hidden"></h1>
+      <form action="" id="todo-form">
+        <input type="text" placeholder="Write a To Do list!" required />
+      </form>
+      <ul id="todo-list"></ul>
+      <div id="last">
+        <div id="quote">
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/clock.js"></script>
+  <script src="js/greetings.js"></script>
+  <script src="js/quote.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/todo.js"></script>
+  <script src="js/weather.js"></script>
+</html>

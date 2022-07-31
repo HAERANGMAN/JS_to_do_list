@@ -1,0 +1,87 @@
+.hidden {
+  display: None;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#logout {
+  position: fixed;
+  right: 10px;
+  background-color: white;
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+}
+
+#back {
+  position: fixed;
+  left: 25%;
+  top: 15%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  height: 70%;
+  width: 50%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#last {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#weather span:first-child {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}
+
+/* #weather span:last-child { */
+/* } */
+
+#clock_box span {
+  font-size: 20px;
+}
+
+#clock_box h2 {
+  font-size: 50px;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+#greeting,
+form {
+  display: inline-block;
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+}
