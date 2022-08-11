@@ -7,15 +7,40 @@
     <title>Do your best!</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
+  <body>    
     <button id="logout" class="hidden" type="submit">log-out</button>
+    <!-- <div id="weather">
+      <span></span>
+      <span></span>
+    </div> -->
+    <div id="apps">            
+        <a target="_blank" class="tile" aria-label="Gmail" title="Gmail" href="https://mail.google.com/">
+          <img src="./cons/gmail.ico" alt="">
+          <span>Gmail</span>
+        </a>
+        <a target="_blank" class="tile" aria-label="Google Calendar" title="Google Calendar" href="https://calendar.google.com/calendar">
+          <img src="./cons/calendar.png" alt="">
+          <span>Calendar</span>
+        </a>
+        <a target="_blank" class="tile" aria-label="YouTube" title="YouTube" href="https://www.youtube.com/">
+          <img src="./cons/youtube.png" alt="">
+          <span>YouTube</span>
+        </a><a target="_blank" class="tile" aria-label="NAVER" title="NAVER" href="https://www.naver.com/">
+          <img src="./cons/naver.png" alt="">  
+          <span>NAVER</span>
+        </a>
+        <a target="_blank" class="tile" aria-label="네이버 태국어사전" title="네이버 태국어사전" href="https://dict.naver.com/thkodict/#/main">
+        <img src="./cons/thidic.png" alt="">
+          <span>태국어사전</span>
+        </a>
+        <a target="_blank" class="tile" aria-label="Google Maps" title="Google Maps" href="https://www.google.com/maps/@13.7268598,100.5691922,13.53z">
+          <img src="./cons/googlemap.png" alt="">
+          <span>Maps</span>
+        </a>
+    </div>
+    
     <div id="back">
-      <div id="weather">
-        <span></span>
-        <span></span>
-      </div>
       <div id="clock_box">
-        <span>현재시간</span>
         <h2 id="clock">00:00:00</h2>
       </div>
       <form action="" class="hidden" id="login-form">
@@ -26,7 +51,16 @@
       <form action="" id="todo-form">
         <input type="text" placeholder="Write a To Do list!" required />
       </form>
-      <ul id="todo-list"></ul>
+      <div id="list_name">
+        <span>will do</span>
+        <span>doing</span>
+        <span>done</span>
+      </div>
+      <div id="list-zone">
+        <ul id="todo-list"></ul>
+        <ul id="doing-list"></ul>
+        <ul id="done-list"></ul>
+      </div>
       <div id="last">
         <div id="quote">
           <span></span>
