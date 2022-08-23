@@ -21,7 +21,7 @@ body {
   margin: auto;
   left: 0;
   right: 0;
-  top: 15%;
+  top: 16%;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
   height: 75%;
@@ -102,6 +102,34 @@ li {
   font-size: 15px;
 }
 
+#list_name{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 5%;
+}
+
+#list_name div{
+  margin: 0 0.5% 0 0.5%;
+  width: 33%;
+  height: 100%;
+}
+
+
+#list_name div div{
+  margin: 0;
+  padding: 0;
+  margin-left: 35%;
+  width: 30%;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  vertical-align: middle;
+  background-color: black;
+}
+
 #list-zone {
   margin: 0;
   padding: 0;
@@ -121,7 +149,7 @@ li {
 
 #apps{
   position: fixed;
-  width: 40vw;
+  width: 50vw;
   height: 10vh;
   margin: 3vh auto;
   left: 0;
