@@ -106,19 +106,24 @@ li {
   font-size: 15px;
 }
 
-#list_name{
-  margin: 0;
-  padding: 0;
+#list_name {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 5%;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 10px 0;
+  height: auto;
 }
 
-#list_name div{
-  margin: 0 0.5% 0 0.5%;
-  width: 33%;
-  height: 100%;
+#list_name div {
+  background-color: black;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 6px 18px;
+  border-radius: 12px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 
