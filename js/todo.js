@@ -1,82 +1,147 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
+const doingList = document.getElementById("doing-list");
 const doneList = document.getElementById("done-list");
 
-//JSON.stringify() -> 스트링화
-//JSON.parse() -> 오브젝트화
-////////////////////////////////////////////////////////////
-//[SAVING]
-
-//항상 새 리스트에서 출발하기 떄문에 새로고침해서 입력하면 새로저장됨
-//그래서 기존의 것을 가져오기 위해 const가 아니라 let으로 바꿈
-let toDos = [];
 const TODOS_KEY = "todos";
+const DOINGS_KEY = "doings";
+const DONES_KEY = "dones";
 
+let toDos = [];
+let doings = [];
+let dones = [];
+
+// 저장 함수들
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
-////////////////////////////////////////////////////////////
-//[DELETING]
-//event는 함수가 사용되었던 이벤트에대한 값들을 저장하는 것
-function deleteTodoList(event) {
-  const removeList = event.target.parentElement; //이벤트.타겟하기.이벤트값중파렌트엘리먼트
-  removeList.style = "text-decoration:line-through";
-  console.log(removeList);
-  removeList.querySelector("button").innerText = "🐥";
-  // removeList.removeList;
-  doneList.appendChild(removeList);
-  // removeList.querySelector("button").innerText("🐥");
-  // toDos 배열이 가진 값에 filter를 통해 삭제를 누른 toDos의 id값을 제외한
-  // 다른 id를 가진 toDos는 유지시켜줌
-  toDos = toDos.filter((tomato) => tomato.id !== parseInt(removeList.id));
-  saveToDos();
+function saveDoings() {
+  localStorage.setItem(DOINGS_KEY, JSON.stringify(doings));
 }
-// list.filter(); // n번째에 함수값이 적용되어서나온값이 n과동일하면 리스트에남김
 
-////////////////////////////////////////////////////////////
-//[ADDING]
-//createElement의 사용!
-function paintToDo(newToDo) {
-  const new_li = document.createElement("li");
-  new_li.id = newToDo.id;
-  const new_span = document.createElement("span");
-  new_span.innerText = newToDo.text;
+function saveDones() {
+  localStorage.setItem(DONES_KEY, JSON.stringify(dones));
+}
+
+// will do → doing 으로 이동
+function moveToDoing(event) {
+  const li = event.target.parentElement;
+  const id = parseInt(li.id);
+  const text = li.querySelector("span").innerText;
+
+  // will do 리스트에서 제거
+  toDos = toDos.filter((todo) => todo.id !== id);
+  saveToDos();
+
+  // doing 리스트에 추가
+  const doingObj = { text, id };
+  doings.push(doingObj);
+  saveDoings();
+
+  // UI 이동
+  li.remove();
+  paintDoing(doingObj);
+}
+
+// doing → done 으로 이동
+function moveToDone(event) {
+  const li = event.target.parentElement;
+  const id = parseInt(li.id);
+  const text = li.querySelector("span").innerText;
+
+  // doing 리스트에서 제거
+  doings = doings.filter((item) => item.id !== id);
+  saveDoings();
+
+  // done 리스트에 추가
+  const doneObj = { text, id };
+  dones.push(doneObj);
+  saveDones();
+
+  // UI 이동
+  li.remove();
+  paintDone(doneObj);
+}
+
+// 각 리스트에 아이템 추가
+function paintToDo(obj) {
+  const li = document.createElement("li");
+  li.id = obj.id;
+  const span = document.createElement("span");
+  span.innerText = obj.text;
+  const btn = document.createElement("button");
+  btn.innerText = "🐥";
+  btn.style = "margin: 0px 10px 3px 0px";
+  btn.addEventListener("click", moveToDoing);
+  li.appendChild(btn);
+  li.appendChild(span);
+  toDoList.appendChild(li);
+}
+
+function paintDoing(obj) {
+  const li = document.createElement("li");
+  li.id = obj.id;
+  const span = document.createElement("span");
+  span.innerText = obj.text;
+  const btn = document.createElement("button");
+  btn.innerText = "👨🏻‍💻";
+  btn.style = "margin: 0px 10px 3px 0px";
+  btn.addEventListener("click", moveToDone);
+  li.appendChild(btn);
+  li.appendChild(span);
+  doingList.appendChild(li);
+}
+
+function paintDone(obj) {
+  const li = document.createElement("li");
+  li.id = obj.id;
+  const span = document.createElement("span");
+  span.innerText = obj.text;
   const btn = document.createElement("button");
   btn.innerText = "✅";
+  btn.disabled = true;
   btn.style = "margin: 0px 10px 3px 0px";
-  btn.addEventListener("click", deleteTodoList);
-  new_li.appendChild(btn);
-  new_li.appendChild(new_span);
-  toDoList.appendChild(new_li);
-  console.log(new_li);
+  li.appendChild(btn);
+  li.appendChild(span);
+  doneList.appendChild(li);
 }
 
-//event는 submit이라는 이벤트에대한 값들을 저장하는 것
-//이벤트 인자를 가져와서 먼저 새로고침 안되기 멈춰놓기
+// 입력 처리
 function handleToDoSubmit(event) {
   event.preventDefault();
-  const newToDoInput = toDoInput.value; //인풋은 여기서 저장됨
-  toDoInput.value = ""; //그리고 값은 리셋
-  const newToDoObj = {
-    text: newToDoInput,
-    id: Date.now(), //시간을 id값으로 사용
+  const text = toDoInput.value;
+  toDoInput.value = "";
+  const newObj = {
+    text,
+    id: Date.now()
   };
-  toDos.push(newToDoObj); //append가 push임
-  paintToDo(newToDoObj);
+  toDos.push(newObj);
   saveToDos();
+  paintToDo(newObj);
+}
+
+// 초기화: localStorage 불러오기
+function loadSavedData() {
+  const savedToDos = localStorage.getItem(TODOS_KEY);
+  if (savedToDos) {
+    toDos = JSON.parse(savedToDos);
+    toDos.forEach(paintToDo);
+  }
+
+  const savedDoings = localStorage.getItem(DOINGS_KEY);
+  if (savedDoings) {
+    doings = JSON.parse(savedDoings);
+    doings.forEach(paintDoing);
+  }
+
+  const savedDones = localStorage.getItem(DONES_KEY);
+  if (savedDones) {
+    dones = JSON.parse(savedDones);
+    dones.forEach(paintDone);
+  }
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
-
-const savedToDos = localStorage.getItem(TODOS_KEY);
-
-if (savedToDos !== null) {
-  const parsedToDos = JSON.parse(savedToDos);
-  toDos = parsedToDos; //만약 local에 값이 있다면 변수로 돌려줌(새로고침해도 기존값저장위해)
-  //arrow function : for문처럼 사용 item이 i가 됨
-  //parsedToDos.forEach((item) => console.log("this is turn off item", item));
-  //forEach를 통해 len(parsedToDos)만큼 (함수)실행
-  parsedToDos.forEach(paintToDo);
-}
+loadSavedData();
