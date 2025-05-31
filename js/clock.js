@@ -12,7 +12,7 @@ function getClock() {
   const Hours = String(today.getHours()).padStart(2, "0"); // 자리수, 빈자리에넣을 숫자, str가능
   const Minutes = String(today.getMinutes()).padStart(2, "0");
   const Seconds = String(today.getSeconds()).padStart(2, "0"); //padEnd로도 가능함
-  const mSeconds = String(today.getMilliseconds()).padStart(2, "0"); //substr(0, 2)로 자리수 조정가능
+  const mSeconds = String(today.getMilliseconds()).padStart(3, "0").substr(0, 2); //substr(0, 2)로 자리수 조정가능
   clock.innerText = `${Hours}:${Minutes}:${Seconds}:${mSeconds}`;
 }
 
